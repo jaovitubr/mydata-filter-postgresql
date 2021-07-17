@@ -1,4 +1,4 @@
-import MySqlTransformer from "../..";
+import PostgreSqlTransformer from "../..";
 import { IRuleObject } from "..";
 
 import CEIL from "./ceil";
@@ -11,6 +11,7 @@ import ENDS_WITH from "./ends_with";
 import STARTS_WITH from "./starts_with";
 import CONCAT from "./concat";
 import TRIM from "./trim";
+import YEAR from "./year";
 import MONTH from "./month";
 import DAY from "./day";
 import HOUR from "./hour";
@@ -28,6 +29,7 @@ const functions: IRuleObject = {
     STARTS_WITH,
     CONCAT,
     TRIM,
+    YEAR,
     MONTH,
     DAY,
     HOUR,
@@ -35,7 +37,7 @@ const functions: IRuleObject = {
     SECOND,
 }
 
-export default function FUNCTION_CALL(node: any, ctx: MySqlTransformer) {
+export default function FUNCTION_CALL(node: any, ctx: PostgreSqlTransformer) {
     if (Object.keys(functions).includes(node.function_name)) {
         ctx.inline_functions++;
 

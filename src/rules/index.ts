@@ -21,10 +21,10 @@ import DIVISION from "./division";
 import STRING from "./string";
 import NUMBER from "./number";
 import BOOLEAN from "./boolean";
-import MySqlTransformer from "..";
+import PostgreSqlTransformer from "..";
 
 export interface IRule {
-    (node: any, ctx: MySqlTransformer): string;
+    (node: any, ctx: PostgreSqlTransformer): string;
 }
 
 export interface IRuleObject {

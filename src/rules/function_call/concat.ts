@@ -1,5 +1,5 @@
-import MySqlTransformer from "../..";
+import PostgreSqlTransformer from "../..";
 
-export default function CONCAT(node: any, ctx: MySqlTransformer) {
+export default function CONCAT(node: any, ctx: PostgreSqlTransformer) {
     return `CONCAT(${node.arguments.map((arg: any) => ctx.transform(arg)).join(", ")})`;
 }

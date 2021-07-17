@@ -19,7 +19,7 @@ npm install odata-filter
 Compile a JSON-AST code that can be used later by a transformer:
 
 ```javascript
-const { Compile: QueryFilterCompile, MySqlTransformer } = require("odata-filter");
+const { Compile: QueryFilterCompile, PostgreSqlTransformer } = require("odata-filter");
 
 const code = `(user.username == "Ana") or (username == "Mari")`;
 
@@ -33,12 +33,12 @@ QueryFilterCompile(code).then(ast => {
 Compile a mysql where clause from a string using a transformer:
 
 ```javascript
-const { Compile: QueryFilterCompile, MySqlTransformer } = require("odata-filter");
+const { Compile: QueryFilterCompile, PostgreSqlTransformer } = require("odata-filter");
 
 const code = `(user.username == "Ana") or (username == "Ana")`;
 
 QueryFilterCompile(code, {
-    transformer: new MySqlTransformer()
+    transformer: new PostgreSqlTransformer()
 }).then(query => {
     console.log(query); // (`user`.`username` == 'Ana') OR (`username` == 'Ana')
 }).catch(error => {
@@ -48,14 +48,14 @@ QueryFilterCompile(code, {
 
 Exemplo prático usando um servidor express
 ```javascript
-const { Compile: QueryFilterCompile, MySqlTransformer } = require("odata-filter");
+const { Compile: QueryFilterCompile, PostgreSqlTransformer } = require("odata-filter");
 const express = require('express');
 const app = express();
 
 // respond with compiled mysql query
 app.get('/', function (req, res) {
     QueryFilterCompile(req.query.filter, {
-        transformer: new MySqlTransformer()
+        transformer: new PostgreSqlTransformer()
     }).then(query => {
         res.send(query);
     }).catch(error => {
@@ -74,7 +74,7 @@ Compile(code, {
 
 ## Available Embeded Transformers
 ```typescript
-MySqlTransformer({}): string;
+PostgreSqlTransformer({}): string;
 
 TypeOrmTransformer({}): string; // inDev
 ```

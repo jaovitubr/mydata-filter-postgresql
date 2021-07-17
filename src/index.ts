@@ -1,14 +1,14 @@
 import rules from "./rules";
 
-export interface MySqlTransformerOptions {
+export interface PostgreSqlTransformerOptions {
     max_inline_functions?: number;
     scope?: string[][];
 }
 
-export class MySqlTransformer {
+export class PostgreSqlTransformer {
     inline_functions = 0;
 
-    constructor(public options: MySqlTransformerOptions = {}) { }
+    constructor(public options: PostgreSqlTransformerOptions = {}) { }
 
     transform(rule: any) {
         if (Object.keys(rules).includes(rule.type)) {
@@ -18,7 +18,7 @@ export class MySqlTransformer {
         }
     }
 
-    mysql_escape_string(str: string) {
+    escape_string(str: string) {
         if (!str) return str;
 
         return str
@@ -49,4 +49,4 @@ export class MySqlTransformer {
     }
 }
 
-export default MySqlTransformer;
+export default PostgreSqlTransformer;

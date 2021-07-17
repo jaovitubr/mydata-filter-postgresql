@@ -1,5 +1,5 @@
-import MySqlTransformer from "..";
+import PostgreSqlTransformer from "..";
 
-export default function GE(node: any, ctx: MySqlTransformer) {
+export default function GE(node: any, ctx: PostgreSqlTransformer) {
     return `${ctx.transform(node.left)} >= ${ctx.transform(node.right)}`
 }

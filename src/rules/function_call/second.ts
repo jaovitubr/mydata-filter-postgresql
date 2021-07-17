@@ -1,7 +1,7 @@
-import MySqlTransformer from "../..";
+import PostgreSqlTransformer from "../..";
 
-export default function SECOND(node: any, ctx: MySqlTransformer) {
+export default function SECOND(node: any, ctx: PostgreSqlTransformer) {
     const argument_node = node.arguments[0];
     
-    return `SECOND(${ctx.transform(argument_node)})`;
+    return `EXTRACT(SECOND FROM ${ctx.transform(argument_node)})`;
 }

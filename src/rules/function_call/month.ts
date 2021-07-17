@@ -1,7 +1,7 @@
-import MySqlTransformer from "../..";
+import PostgreSqlTransformer from "../..";
 
-export default function MONTH(node: any, ctx: MySqlTransformer) {
+export default function MONTH(node: any, ctx: PostgreSqlTransformer) {
     const argument_node = node.arguments[0];
     
-    return `MONTH(${ctx.transform(argument_node)})`;
+    return `EXTRACT(MONTH FROM ${ctx.transform(argument_node)})`;
 }

@@ -1,6 +1,6 @@
-import MySqlTransformer from "..";
+import PostgreSqlTransformer from "..";
 
-export default function CONTAINS_WORD(node: any, ctx: MySqlTransformer) {
+export default function CONTAINS_WORD(node: any, ctx: PostgreSqlTransformer) {
     const possible_types = ["STRING", "IDENTIFIER", "IDENTIFIER_PATH", "FUNCTION_CALL"];
 
     if (possible_types.includes(node.left.type) && possible_types.includes(node.right.type)) {
