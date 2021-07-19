@@ -29,7 +29,7 @@ try {
         transformer: new PostgreSqlTransformer()
     });
 
-    console.log(query); // ("user"."username" = 'Ana') OR ("username" = 'Ana');
+    console.log(query); // ("user"."username" = 'Ana') OR ("username" = 'Ana')
 } catch (error) {
     console.error(error);
 }
