@@ -1,17 +1,17 @@
-# OData Filter - PostgreSql Transformer
-Postgre transformer for [odata-filter](https://www.npmjs.com/package/odata-filter) package
+# myData Filter - PostgreSql Transformer
+Postgre transformer for [mydata-filter](https://www.npmjs.com/package/mydata-filter) package
 
-[![npm version](https://badge.fury.io/js/odata-filter-postgresql.svg)](https://badge.fury.io/js/odata-filter-postgresql)
-[![GitHub issues](https://img.shields.io/github/issues/joaovitmac/odata-filter-postgresql.svg)](https://github.com/joaovitmac/odata-filter-postgresql/issues)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/joaovitmac/odata-filter-postgresql/main/LICENSE)
+[![npm version](https://badge.fury.io/js/mydata-filter-postgresql.svg)](https://badge.fury.io/js/mydata-filter-postgresql)
+[![GitHub issues](https://img.shields.io/github/issues/joaovitmac/mydata-filter-postgresql.svg)](https://github.com/joaovitmac/mydata-filter-postgresql/issues)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/joaovitmac/mydata-filter-postgresql/main/LICENSE)
 
-[![GitHub stars](https://img.shields.io/github/stars/joaovitmac/odata-filter-postgresql.svg?style=social&label=Stars)](https://github.com/joaovitmac/odata-filter-postgresql)
-[![GitHub forks](https://img.shields.io/github/forks/joaovitmac/odata-filter-postgresql.svg?style=social&label=Forks)](https://github.com/joaovitmac/odata-filter-postgresql)
+[![GitHub stars](https://img.shields.io/github/stars/joaovitmac/mydata-filter-postgresql.svg?style=social&label=Stars)](https://github.com/joaovitmac/mydata-filter-postgresql)
+[![GitHub forks](https://img.shields.io/github/forks/joaovitmac/mydata-filter-postgresql.svg?style=social&label=Forks)](https://github.com/joaovitmac/mydata-filter-postgresql)
 
 ## Installation
 
 ```shell
-npm install odata-filter-postgresql
+npm install mydata-filter-postgresql
 ```
 
 ## Usage
@@ -19,8 +19,8 @@ npm install odata-filter-postgresql
 Transform a filter string to a PostgreSql query
 
 ```javascript
-import { ParseSync } from "odata-filter";
-import PostgreSqlTransformer from "odata-filter-postgresql";
+import { ParseSync } from "mydata-filter";
+import PostgreSqlTransformer from "mydata-filter-postgresql";
 
 const filter = `(user.username == "Ana") or (username == "Mari")`;
 
@@ -38,8 +38,8 @@ try {
 Transform a filter string to a PostgreSql query asynchronously
 
 ```javascript
-import { ParseSync } from "odata-filter";
-import PostgreSqlTransformer from "odata-filter-postgresql";
+import { ParseSync } from "mydata-filter";
+import PostgreSqlTransformer from "mydata-filter-postgresql";
 
 const filter = `(user.username == "Ana") or (username == "Mari")`;
 
