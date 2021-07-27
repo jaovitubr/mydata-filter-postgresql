@@ -1,7 +1,7 @@
-import PostgreSqlTransformer from "../..";
+import { PostgreSqlTransformer } from "../..";
 
 export default function MONTH(node: any, ctx: PostgreSqlTransformer) {
     const argument_node = node.arguments[0];
     
-    return `EXTRACT(MONTH FROM ${ctx.transform(argument_node)})`;
+    return `MONTH(${ctx.transform(argument_node)})`;
 }

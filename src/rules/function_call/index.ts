@@ -1,4 +1,4 @@
-import PostgreSqlTransformer from "../..";
+import { PostgreSqlTransformer } from "../..";
 import { IRuleObject } from "..";
 
 import CEIL from "./ceil";

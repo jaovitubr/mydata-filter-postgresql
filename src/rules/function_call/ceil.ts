@@ -1,4 +1,4 @@
-import PostgreSqlTransformer from "../..";
+import { PostgreSqlTransformer } from "../..";
 
 export default function CEIL(node: any, ctx: PostgreSqlTransformer) {
     const argument_node = node.arguments[0];

@@ -1,20 +1,50 @@
 import rules from "./rules";
+import * as clauses from "./clause";
 
 export interface PostgreSqlTransformerOptions {
     max_inline_functions?: number;
     scope?: string[][];
+    clause?: "WHERE" | "ORDER";
+    features?: string[];
+    root_features?: string[];
 }
 
 export class PostgreSqlTransformer {
     inline_functions = 0;
+    offset = -1;
+    features: string[] = [];
+    root_features: string[] = [];
 
-    constructor(public options: PostgreSqlTransformerOptions = {}) { }
+    constructor(public options: PostgreSqlTransformerOptions = {}) {
+        const clause = this.options.clause ? clauses[this.options.clause] : undefined;
+
+        this.root_features = [...(clause?.root_features || []), ...(this.options.root_features || [])];
+        this.features = [...(clause?.features || []), ...(this.options.features || [])];
+    }
 
     transform(rule: any) {
+        this.offset++;
+
         if (Object.keys(rules).includes(rule.type)) {
+            this.check_rule_feature(rule);
+
             return rules[rule.type](rule, this);
         } else {
             throw new Error(`Unhandled AST node type ${rule.type}`);
+        }
+    }
+
+    check_rule_feature(rule: any) {
+        if (this.offset === 0 && rule.type === "PARENTHESES") {
+            this.check_rule_feature(rule.data);
+            return;
+        }
+
+        if (
+            (this.offset === 0 && this.root_features.length > 0 && !this.root_features.includes(rule.type)) ||
+            (this.features.length > 0 && !this.features.includes(rule.type))
+        ) {
+            throw new Error(`Unexpected ${rule.type} token${rule.value ? `: ${rule.value}` : ""}`);
         }
     }
 

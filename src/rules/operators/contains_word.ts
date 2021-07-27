@@ -1,4 +1,4 @@
-import PostgreSqlTransformer from "..";
+import { PostgreSqlTransformer } from "../..";
 
 export default function CONTAINS_WORD(node: any, ctx: PostgreSqlTransformer) {
     const possible_types = ["STRING", "IDENTIFIER", "IDENTIFIER_PATH", "FUNCTION_CALL"];

@@ -1,7 +1,7 @@
-import PostgreSqlTransformer from "../..";
+import { PostgreSqlTransformer } from "../..";
 
 export default function HOUR(node: any, ctx: PostgreSqlTransformer) {
     const argument_node = node.arguments[0];
     
-    return `EXTRACT(HOUR FROM ${ctx.transform(argument_node)})`;
+    return `HOUR(${ctx.transform(argument_node)})`;
 }
