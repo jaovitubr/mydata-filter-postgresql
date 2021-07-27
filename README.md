@@ -16,7 +16,7 @@ npm install mydata-filter-postgresql
 
 ## Usage
 
-Transform a filter string to a PostgreSql query
+Transform a filter query string into a MySQL WHERE clause query
 
 ```javascript
 import { ParseSync } from "mydata-filter";
@@ -26,38 +26,78 @@ const filter = `(user.username == "Ana") or (username == "Mari")`;
 
 try {
     const query = ParseSync(filter, {
-        transformer: new PostgreSqlTransformer()
+        transformer: new PostgreSqlTransformer({
+            clause: "WHERE"
+        })
     });
 
-    console.log(query); // ("user"."username" = 'Ana') OR ("username" = 'Ana')
+    console.log(query); // (`user`.`username" = 'Ana') OR (`username` = 'Ana')
 } catch (error) {
     console.error(error);
 }
 ```
 
-Transform a filter string to a PostgreSql query asynchronously
+Transform a filter query string into a MySQL ORDER BY clause query
 
 ```javascript
 import { ParseSync } from "mydata-filter";
 import PostgreSqlTransformer from "mydata-filter-postgresql";
 
-const filter = `(user.username == "Ana") or (username == "Mari")`;
+const filter = `person.age ASC`;
 
-Parse(filter, {
-    transformer: new PostgreSqlTransformer()
-}).then(query => {
-    console.log(query); // ("user"."username" = 'Ana') OR ("username" = 'Ana')
-}).catch(error => {
+try {
+    const query = ParseSync(filter, {
+        transformer: new PostgreSqlTransformer({
+            clause: "ORDER"
+        })
+    });
+
+    console.log(query); // "person"."age" ASC
+} catch (error) {
     console.error(error);
-});
+}
+```
+
+Transform a filter query string into a MySQL query with specific features
+
+```javascript
+import { ParseSync } from "mydata-filter";
+import PostgreSqlTransformer from "mydata-filter-postgresql";
+
+const filter = `"ana" == "Ana"`;
+
+try {
+    const query = ParseSync(filter, {
+        transformer: new PostgreSqlTransformer({
+            features: [
+                "EQ",
+                "NEQ",
+
+                "BOOLEAN",
+                "NUMBER",
+                "STRING",
+            ],
+            root_features: [
+                "EQ",
+                "NEQ",
+            ]
+        })
+    });
+
+    console.log(query); // "ana" == "Ana"
+} catch (error) {
+    console.error(error);
+}
 ```
 
 ## Constructor optional options
-
 Name | Type | Description
 ------------ | ------------- | -------------
 max_inline_functions | number | Define max inline call functions
 scope | string[][] | Define scope with available identifiers
+clause | "WHERE" \| "ORDER" | Specify pre-available [features](https://github.com/joaovitmac/mydata-filter#supported-features-identifiers-name) model
+features | string[] | Defines all available [features](https://github.com/joaovitmac/mydata-filter#supported-features-identifiers-name)
+root_features | string[] | Defines the specific [features](https://github.com/joaovitmac/mydata-filter#supported-features-identifiers-name) available in the root
 
 ## Supported Inline Functions
 Name | Arguments
@@ -77,3 +117,9 @@ MONTH | String \| Identifier
 HOUR | String \| Identifier
 MINUTE | String \| Identifier
 SECOND | String \| Identifier
+
+## Supported Sorting
+Name | Alias
+------------ | -------------
+Ascending | ASC
+Descending | DESC
